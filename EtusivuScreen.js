@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function LomakeScreen() {
+export default function EtusivuScreen() {
   return (
     <View style={styles.container}>
-      <Text>Tänne lomake</Text>
+      <Text>Tervetuloa! Tämä on sovelluksen etusivu.</Text>
       <StatusBar style="auto" />
     </View>
   );
