@@ -10,6 +10,7 @@ export default function LomakeScreen() {
   const [valittuTyyppi, setValittuTyyppi] = useState();
   const [valittuVari, setValittuVari] = useState();
   const [valittuTilaisuus, setValittuTilaisuus] = useState();
+  const [valittuSijainti, setValittuSijainti] = useState();
 
   const pickerRef = useRef();
   function open() {
@@ -69,6 +70,17 @@ export default function LomakeScreen() {
         <Picker.Item label="Ulkoilu" value="Ulkoilu" />
         <Picker.Item label="Urheilu" value="Urheilu" />
       </Picker> 
+
+      <Picker
+        style={{width: 150}}
+        ref={pickerRef}
+        selectedValue={valittuSijainti}
+        onValueChange={(itemValue, itemIndex) =>
+          setValittuSijainti(itemValue)
+        }>
+        <Picker.Item label="Kaappi" value="Kaappi" />
+        <Picker.Item label="Varasto" value="Varasto" />
+      </Picker>
 
       <Button>Lisää listalle</Button>
       <StatusBar style="auto" />
