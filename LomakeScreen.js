@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, TextInput } from 'react-native-paper';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, onValue, remove, set, push } from "firebase/database";
 
@@ -33,7 +33,7 @@ export default function LomakeScreen() {
   }
 
   const lisaaListalle = () => {
-    if (vaate.kuvaus && vaate.tyyppi && vaate.vari && vaate.tilaisuus && vaate.sijainti) {
+    if (vaate.kuvaus) {
       const uusiVaate = push(ref(database, 'vaatteet/'));
       const uusiKey = uusiVaate.key; 
   
@@ -52,6 +52,20 @@ export default function LomakeScreen() {
       Alert.alert('Error', 'Täytä kaikki tiedot');
     }
   };
+
+  useEffect(() => {
+    const itemsRef = ref(database, 'vaatteet/');
+    onValue(itemsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setVaateLista(Object.values(data));
+      } else {
+        setVaateLista([]); 
+      }
+    })
+  }, []);  
+
+  console.log(vaateLista);
 
   return (
     <View style={styles.container}>
