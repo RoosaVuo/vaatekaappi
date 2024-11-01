@@ -6,6 +6,7 @@ import ListaScreen from './ListaScreen'
 import LomakeScreen from './LomakeScreen'
 import EtusivuScreen from './EtusivuScreen'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { app } from './firebaseConfig';
 
 const Tab = createBottomTabNavigator();
 

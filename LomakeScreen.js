@@ -1,16 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, TextInput } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef } from 'react';
+import { app } from './firebaseConfig';
+import { getDatabase, ref, onValue, remove, set, push } from "firebase/database";
 
 export default function LomakeScreen() {
 
-  const [vaate, setVaate] = useState();
+  const database = getDatabase(app);
+  const [kuvaus, setKuvaus] = useState();
   const [valittuTyyppi, setValittuTyyppi] = useState();
   const [valittuVari, setValittuVari] = useState();
   const [valittuTilaisuus, setValittuTilaisuus] = useState();
   const [valittuSijainti, setValittuSijainti] = useState();
+  const [vaate, setVaate] = useState({
+    keyId: '',
+    kuvaus: '',
+    tyyppi: '',
+    vari: '',
+    tilaisuus: '',
+    sijainti: ''
+  });
+  const [vaateLista, setVaateLista] = useState([]);
 
   const pickerRef = useRef();
   function open() {
@@ -20,6 +32,26 @@ export default function LomakeScreen() {
     pickerRef.current.blur();
   }
 
+  const lisaaListalle = () => {
+    if (vaate.kuvaus && vaate.tyyppi && vaate.vari && vaate.tilaisuus && vaate.sijainti) {
+      const uusiVaate = push(ref(database, 'vaatteet/'));
+      const uusiKey = uusiVaate.key; 
+  
+      set(uusiVaate, {
+        keyId: uusiKey,  
+        kuvaus: vaate.kuvaus,
+        tyyppi: vaate.tyyppi,
+        vari: vaate.vari,
+        tilaisuus: vaate.tilaisuus,
+        sijainti: vaate.sijainti
+      })
+      .catch((error) => {
+        console.error('Virhe tallennuksessa:', error);
+      });
+    } else {
+      Alert.alert('Error', 'Täytä kaikki tiedot');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -27,15 +59,15 @@ export default function LomakeScreen() {
       <TextInput 
         style={{ width: '90%', marginBottom: 10}}
         label="Vaate"
-        onChangeText={text => setVaate(text)}
-        value={vaate}
+        onChangeText={text => setVaate({...vaate, kuvaus: text})}
+        value={vaate.kuvaus}
       />
       <Picker
         style={{width: 150}}
         ref={pickerRef}
-        selectedValue={valittuTyyppi}
+        selectedValue={vaate.tyyppi}
         onValueChange={(itemValue, itemIndex) =>
-          setValittuTyyppi(itemValue)
+          setVaate({...vaate, tyyppi: itemValue})
         }>
         <Picker.Item label="Housut" value="Housut" />
         <Picker.Item label="Paita" value="Paita" />
@@ -46,9 +78,9 @@ export default function LomakeScreen() {
       <Picker
         style={{width: 150}}
         ref={pickerRef}
-        selectedValue={valittuVari}
+        selectedValue={vaate.vari}
         onValueChange={(itemValue, itemIndex) =>
-          setValittuVari(itemValue)
+          setVaate({...vaate, vari: itemValue})
         }>
         <Picker.Item label="Punainen" value="Punainen" />
         <Picker.Item label="Musta" value="Musta" />
@@ -61,9 +93,9 @@ export default function LomakeScreen() {
       <Picker
         style={{width: 150}}
         ref={pickerRef}
-        selectedValue={valittuTilaisuus}
+        selectedValue={vaate.tilaisuus}
         onValueChange={(itemValue, itemIndex) =>
-          setValittuTilaisuus(itemValue)
+          setVaate({...vaate, tilaisuus: itemValue})
         }>
         <Picker.Item label="Arki" value="Arki" />
         <Picker.Item label="Juhla" value="Juhla" />
@@ -74,15 +106,16 @@ export default function LomakeScreen() {
       <Picker
         style={{width: 150}}
         ref={pickerRef}
-        selectedValue={valittuSijainti}
+        selectedValue={vaate.sijainti}
         onValueChange={(itemValue, itemIndex) =>
-          setValittuSijainti(itemValue)
+          setVaate({...vaate, sijainti: itemValue})
         }>
         <Picker.Item label="Kaappi" value="Kaappi" />
         <Picker.Item label="Varasto" value="Varasto" />
       </Picker>
 
-      <Button>Lisää listalle</Button>
+      <Button style={{width: 200 }} mode="contained" onPress={lisaaListalle}>
+        Lisää listalle</Button>
       <StatusBar style="auto" />
     </View>
   );

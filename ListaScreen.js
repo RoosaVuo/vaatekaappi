@@ -3,12 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef } from 'react';
+import { app } from './firebaseConfig';
+import { getDatabase, ref, onValue, remove, set } from "firebase/database";
 
 export default function ListaScreen() {
   const [valittuTyyppi, setValittuTyyppi] = useState();
   const [valittuVari, setValittuVari] = useState();
   const [valittuTilaisuus, setValittuTilaisuus] = useState();
   const [valittuSijainti, setValittuSijainti] = useState();
+
+  const database = getDatabase(app);
 
   const pickerRef = useRef();
   function open() {
