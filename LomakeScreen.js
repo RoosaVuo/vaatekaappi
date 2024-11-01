@@ -6,6 +6,7 @@ import { useState, useRef } from 'react';
 
 export default function LomakeScreen() {
 
+  const [vaate, setVaate] = useState();
   const [valittuTyyppi, setValittuTyyppi] = useState();
   const [valittuVari, setValittuVari] = useState();
   const [valittuTilaisuus, setValittuTilaisuus] = useState();
@@ -25,6 +26,8 @@ export default function LomakeScreen() {
       <TextInput 
         style={{ width: '90%', marginBottom: 10}}
         label="Vaate"
+        onChangeText={text => setVaate(text)}
+        value={vaate}
       />
       <Picker
         style={{width: 150}}
