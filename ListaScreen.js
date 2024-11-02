@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Button, TextInput, Card } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
@@ -97,6 +97,23 @@ export default function ListaScreen() {
 
       <Button>Näytä suodatettu lista</Button>
       <StatusBar style="auto" />
+
+
+      <FlatList 
+        style={{ marginTop: 10, width: '90%'}}
+        data={vaateLista}
+        renderItem={({item}) => 
+          <Card style={{ marginBottom: 10 }}>
+            <Card.Title title={item.kuvaus} />
+            <Card.Content>
+              <Text variant="bodyMedium">Vaatteen tyyppi: {item.tyyppi}</Text>
+              <Text variant="bodyMedium">Väri: {item.vari}</Text>
+              <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
+              <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
+            </Card.Content>        
+          </Card>
+        }
+      />
     </View>
   );
 }
