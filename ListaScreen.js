@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, onValue, remove, set } from "firebase/database";
 
@@ -11,6 +11,8 @@ export default function ListaScreen() {
   const [valittuVari, setValittuVari] = useState();
   const [valittuTilaisuus, setValittuTilaisuus] = useState();
   const [valittuSijainti, setValittuSijainti] = useState();
+
+  const [vaateLista, setVaateLista] = useState([]);
 
   const database = getDatabase(app);
 
@@ -21,6 +23,20 @@ export default function ListaScreen() {
   function close() {
     pickerRef.current.blur();
   }
+
+  useEffect(() => {
+    const itemsRef = ref(database, 'vaatteet/');
+    onValue(itemsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setVaateLista(Object.values(data));
+      } else {
+        setVaateLista([]); 
+      }
+    })
+  }, []);  
+
+  console.log(vaateLista);
 
 
   return (

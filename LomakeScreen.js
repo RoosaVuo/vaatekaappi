@@ -53,7 +53,7 @@ export default function LomakeScreen() {
     }
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const itemsRef = ref(database, 'vaatteet/');
     onValue(itemsRef, (snapshot) => {
       const data = snapshot.val();
@@ -65,7 +65,7 @@ export default function LomakeScreen() {
     })
   }, []);  
 
-  console.log(vaateLista);
+  console.log(vaateLista); */
 
   return (
     <View style={styles.container}>
