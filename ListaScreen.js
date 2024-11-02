@@ -13,6 +13,7 @@ export default function ListaScreen() {
   const [valittuSijainti, setValittuSijainti] = useState();
 
   const [vaateLista, setVaateLista] = useState([]);
+  const [suodatettuVaateLista, setSuodatettuVaateLista] = useState([]);
 
   const database = getDatabase(app);
 
@@ -37,11 +38,21 @@ export default function ListaScreen() {
   }, []);  
 
   console.log(vaateLista);
+  console.log(suodatettuVaateLista);
+
+  const suodataLista = () => {
+    suodatettuVaateLista([]);
+
+    for (let i=0; i<vaateLista.length; i++) {
+      if (valittuTyyppi == vaateLista.at(i).tyyppi) {
+        suodatettuVaateLista.push(i);
+      }
+    }
+  };
 
 
   return (
-    <View style={styles.container}>   
-      <Button>Näytä kaikki vaatteet</Button>  
+    <View style={styles.container}>    
       <Text>Suodata vaatteita</Text> 
       <Picker
         style={{width: 150}}
@@ -50,6 +61,7 @@ export default function ListaScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setValittuTyyppi(itemValue)
         }>
+        <Picker.Item label="Kaikki" value="Kaikki" />
         <Picker.Item label="Housut" value="Housut" />
         <Picker.Item label="Paita" value="Paita" />
         <Picker.Item label="Takki" value="Takki" />
@@ -63,6 +75,7 @@ export default function ListaScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setValittuVari(itemValue)
         }>
+        <Picker.Item label="Kaikki" value="Kaikki" />
         <Picker.Item label="Punainen" value="Punainen" />
         <Picker.Item label="Musta" value="Musta" />
         <Picker.Item label="Keltainen" value="Keltainen" />
@@ -78,6 +91,7 @@ export default function ListaScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setValittuTilaisuus(itemValue)
         }>
+        <Picker.Item label="Kaikki" value="Kaikki" />
         <Picker.Item label="Arki" value="Arki" />
         <Picker.Item label="Juhla" value="Juhla" />
         <Picker.Item label="Ulkoilu" value="Ulkoilu" />
@@ -91,17 +105,19 @@ export default function ListaScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setValittuSijainti(itemValue)
         }>
+        <Picker.Item label="Kaikki" value="Kaikki" />
         <Picker.Item label="Kaappi" value="Kaappi" />
         <Picker.Item label="Varasto" value="Varasto" />
       </Picker>
 
-      <Button>Näytä suodatettu lista</Button>
+      <Button style={{width: 200 }} mode="contained" onPress={suodataLista}>
+        Näytä suodatettu lista</Button>
       <StatusBar style="auto" />
 
 
       <FlatList 
         style={{ marginTop: 10, width: '90%'}}
-        data={vaateLista}
+        data={suodatettuVaateLista}
         renderItem={({item}) => 
           <Card style={{ marginBottom: 10 }}>
             <Card.Title title={item.kuvaus} />
