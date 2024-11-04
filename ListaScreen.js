@@ -40,11 +40,19 @@ export default function ListaScreen() {
   console.log(suodatettuVaateLista);
 
   const suodataLista = () => {
-    setSuodatettuVaateLista(vaateLista.filter(vaate => vaate.tyyppi === valittuTyyppi || vaate.vari === valittuVari || vaate.tilaisuus === valittuTilaisuus || vaate.sijainti === valittuSijainti));
+    setSuodatettuVaateLista(vaateLista.filter(vaate => {
+      return(
+        (!valittuTyyppi || vaate.tyyppi === valittuTyyppi) &&
+        (!valittuVari || vaate.vari === valittuVari) &&
+        (!valittuTilaisuus || vaate.tilaisuus === valittuTilaisuus) &&
+        (!valittuSijainti || vaate.sijainti === valittuSijainti) 
+      );
+    }));
   };
 
   //ChatGpt apuna virheenselvityksessä vaatelistan arvojen "kopioimisessa" ja suodattamisessa. virhe oli let muuttujan käyttämisessä, kun piti käyttää tilamuuttujaa. Aiemmin let suodatettuVaateLista 
-
+  //ChatGpt uuestaan apuna, useamman suodattimen virheen kanssa. Logiikka oli muuten oikein, mutta useamman lauseen tarvitsi olla return lause, olin aiemmin ketjuttanut ehdot, mutta se ei toiminut
+  
   const naytaLista = () => {
     setSuodatettuVaateLista(vaateLista);
   }
