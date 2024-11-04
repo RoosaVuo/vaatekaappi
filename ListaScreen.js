@@ -86,72 +86,80 @@ export default function ListaScreen() {
   return (
     <View style={styles.container}>    
       <Text>Suodata vaatteita</Text> 
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={valittuTyyppi}
-        onValueChange={(itemValue, itemIndex) =>
-          setValittuTyyppi(itemValue)
-        }>
-        <Picker.Item label="Kaikki" value="Kaikki" />
-        <Picker.Item label="Housut" value="Housut" />
-        <Picker.Item label="Paita" value="Paita" />
-        <Picker.Item label="Takki" value="Takki" />
-        <Picker.Item label="Mekko" value="Mekko" />
-      </Picker> 
+      <View style={styles.picker}>
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={valittuTyyppi}
+          onValueChange={(itemValue, itemIndex) =>
+            setValittuTyyppi(itemValue)
+          }>
+          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Housut" value="Housut" />
+          <Picker.Item label="Paita" value="Paita" />
+          <Picker.Item label="Takki" value="Takki" />
+          <Picker.Item label="Mekko" value="Mekko" />
+        </Picker> 
 
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={valittuVari}
-        onValueChange={(itemValue, itemIndex) =>
-          setValittuVari(itemValue)
-        }>
-        <Picker.Item label="Kaikki" value="Kaikki" />
-        <Picker.Item label="Punainen" value="Punainen" />
-        <Picker.Item label="Musta" value="Musta" />
-        <Picker.Item label="Keltainen" value="Keltainen" />
-        <Picker.Item label="Vihreä" value="Vihreä" />
-        <Picker.Item label="Sininen" value="Sininen" />
-        <Picker.Item label="Valkoinen" value="Valkoinen" />
-      </Picker> 
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={valittuVari}
+          onValueChange={(itemValue, itemIndex) =>
+            setValittuVari(itemValue)
+          }>
+          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Punainen" value="Punainen" />
+          <Picker.Item label="Musta" value="Musta" />
+          <Picker.Item label="Keltainen" value="Keltainen" />
+          <Picker.Item label="Vihreä" value="Vihreä" />
+          <Picker.Item label="Sininen" value="Sininen" />
+          <Picker.Item label="Valkoinen" value="Valkoinen" />
+        </Picker> 
+      </View>
 
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={valittuTilaisuus}
-        onValueChange={(itemValue, itemIndex) =>
-          setValittuTilaisuus(itemValue)
-        }>
-        <Picker.Item label="Kaikki" value="Kaikki" />
-        <Picker.Item label="Arki" value="Arki" />
-        <Picker.Item label="Juhla" value="Juhla" />
-        <Picker.Item label="Ulkoilu" value="Ulkoilu" />
-        <Picker.Item label="Urheilu" value="Urheilu" />
-      </Picker> 
+      <View style={styles.picker}>
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={valittuTilaisuus}
+          onValueChange={(itemValue, itemIndex) =>
+            setValittuTilaisuus(itemValue)
+          }>
+          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Arki" value="Arki" />
+          <Picker.Item label="Juhla" value="Juhla" />
+          <Picker.Item label="Ulkoilu" value="Ulkoilu" />
+          <Picker.Item label="Urheilu" value="Urheilu" />
+        </Picker> 
 
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={valittuSijainti}
-        onValueChange={(itemValue, itemIndex) =>
-          setValittuSijainti(itemValue)
-        }>
-        <Picker.Item label="Kaikki" value="Kaikki" />
-        <Picker.Item label="Kaappi" value="Kaappi" />
-        <Picker.Item label="Varasto" value="Varasto" />
-      </Picker>
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={valittuSijainti}
+          onValueChange={(itemValue, itemIndex) =>
+            setValittuSijainti(itemValue)
+          }>
+          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Kaappi" value="Kaappi" />
+          <Picker.Item label="Varasto" value="Varasto" />
+        </Picker>
+      </View>
 
-      <Button style={{width: 200 }} mode="contained" onPress={naytaLista}>
-        Näytä koko lista</Button>
-      <StatusBar style="auto" />
+      <View style={styles.buttons}>
+        <Button style={{width: 200 }} mode="contained" onPress={naytaLista}>
+          Näytä koko lista</Button>
+        <StatusBar style="auto" />
+        <View>
+          <Button style={{width: 200 }} mode="contained" onPress={suodataLista}>
+            Näytä suodatettu lista</Button>
+          <StatusBar style="auto" />
 
-      <Button style={{width: 200 }} mode="contained" onPress={suodataLista}>
-        Näytä suodatettu lista</Button>
-      <StatusBar style="auto" />
+          <Button style={{width: 200 }} onPress={nollaaSuodattimet}>
+            Nollaa suodattimet</Button>
+        </View>
+      </View>
 
-      <Button style={{width: 200 }} mode="contained" onPress={nollaaSuodattimet}>
-        Nollaa suodattimet</Button>
       <StatusBar style="auto" />
 
       <FlatList 
@@ -180,5 +188,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  picker: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    marginVertical: 10
+  },
+  buttons: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    alignItems: 'top',
+    justifyContent: 'center',
+    height: 40,
+    marginVertical: 10,
+    marginBottom: 30
   },
 });

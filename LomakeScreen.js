@@ -55,68 +55,71 @@ export default function LomakeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Tänne lomake</Text>
+      <Text>Lisää vaate</Text>
       <TextInput 
         style={{ width: '90%', marginBottom: 10}}
         label="Vaate"
         onChangeText={text => setVaate({...vaate, kuvaus: text})}
         value={vaate.kuvaus}
       />
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={vaate.tyyppi}
-        onValueChange={(itemValue, itemIndex) =>
-          setVaate({...vaate, tyyppi: itemValue})
-        }>
-        <Picker.Item label="Valitse" value="" />
-        <Picker.Item label="Housut" value="Housut" />
-        <Picker.Item label="Paita" value="Paita" />
-        <Picker.Item label="Takki" value="Takki" />
-        <Picker.Item label="Mekko" value="Mekko" />
-      </Picker> 
+      <View style={styles.picker}>
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={vaate.tyyppi}
+          onValueChange={(itemValue, itemIndex) =>
+            setVaate({...vaate, tyyppi: itemValue})
+          }>
+          <Picker.Item label="Valitse" value="" />
+          <Picker.Item label="Housut" value="Housut" />
+          <Picker.Item label="Paita" value="Paita" />
+          <Picker.Item label="Takki" value="Takki" />
+          <Picker.Item label="Mekko" value="Mekko" />
+        </Picker> 
 
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={vaate.vari}
-        onValueChange={(itemValue, itemIndex) =>
-          setVaate({...vaate, vari: itemValue})
-        }>
-        <Picker.Item label="Valitse" value="" />
-        <Picker.Item label="Punainen" value="Punainen" />
-        <Picker.Item label="Musta" value="Musta" />
-        <Picker.Item label="Keltainen" value="Keltainen" />
-        <Picker.Item label="Vihreä" value="Vihreä" />
-        <Picker.Item label="Sininen" value="Sininen" />
-        <Picker.Item label="Valkoinen" value="Valkoinen" />
-      </Picker> 
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={vaate.vari}
+          onValueChange={(itemValue, itemIndex) =>
+            setVaate({...vaate, vari: itemValue})
+          }>
+          <Picker.Item label="Valitse" value="" />
+          <Picker.Item label="Punainen" value="Punainen" />
+          <Picker.Item label="Musta" value="Musta" />
+          <Picker.Item label="Keltainen" value="Keltainen" />
+          <Picker.Item label="Vihreä" value="Vihreä" />
+          <Picker.Item label="Sininen" value="Sininen" />
+          <Picker.Item label="Valkoinen" value="Valkoinen" />
+        </Picker> 
+      </View>
+      <View style={styles.picker}>
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={vaate.tilaisuus}
+          onValueChange={(itemValue, itemIndex) =>
+            setVaate({...vaate, tilaisuus: itemValue})
+          }>
+          <Picker.Item label="Valitse" value="" />
+          <Picker.Item label="Arki" value="Arki" />
+          <Picker.Item label="Juhla" value="Juhla" />
+          <Picker.Item label="Ulkoilu" value="Ulkoilu" />
+          <Picker.Item label="Urheilu" value="Urheilu" />
+        </Picker> 
 
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={vaate.tilaisuus}
-        onValueChange={(itemValue, itemIndex) =>
-          setVaate({...vaate, tilaisuus: itemValue})
-        }>
-        <Picker.Item label="Valitse" value="" />
-        <Picker.Item label="Arki" value="Arki" />
-        <Picker.Item label="Juhla" value="Juhla" />
-        <Picker.Item label="Ulkoilu" value="Ulkoilu" />
-        <Picker.Item label="Urheilu" value="Urheilu" />
-      </Picker> 
-
-      <Picker
-        style={{width: 150}}
-        ref={pickerRef}
-        selectedValue={vaate.sijainti}
-        onValueChange={(itemValue, itemIndex) =>
-          setVaate({...vaate, sijainti: itemValue})
-        }>
-        <Picker.Item label="Valitse" value="" />
-        <Picker.Item label="Kaappi" value="Kaappi" />
-        <Picker.Item label="Varasto" value="Varasto" />
-      </Picker>
+        <Picker
+          style={{width: 150}}
+          ref={pickerRef}
+          selectedValue={vaate.sijainti}
+          onValueChange={(itemValue, itemIndex) =>
+            setVaate({...vaate, sijainti: itemValue})
+          }>
+          <Picker.Item label="Valitse" value="" />
+          <Picker.Item label="Kaappi" value="Kaappi" />
+          <Picker.Item label="Varasto" value="Varasto" />
+        </Picker>
+      </View>
 
       <Button style={{width: 200 }} mode="contained" onPress={lisaaListalle}>
         Lisää listalle</Button>
@@ -131,5 +134,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  picker: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    marginVertical: 10
   },
 });
