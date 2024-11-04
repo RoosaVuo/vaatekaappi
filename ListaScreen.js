@@ -4,7 +4,7 @@ import { Button, TextInput, Card } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
-import { getDatabase, ref, onValue, remove, set } from "firebase/database";
+import { getDatabase, ref, onValue, remove, set, setPriority } from "firebase/database";
 
 export default function ListaScreen() {
   const [valittuTyyppi, setValittuTyyppi] = useState();
@@ -55,6 +55,14 @@ export default function ListaScreen() {
   
   const naytaLista = () => {
     setSuodatettuVaateLista(vaateLista);
+  }
+
+  const nollaaSuodattimet = () => {
+    setSuodatettuVaateLista(vaateLista);
+    setValittuTyyppi('Kaikki');
+    setValittuVari('Kaikki');
+    setValittuTilaisuus('Kaikki');
+    setValittuSijainti('Kaikki')
   }
 
   return (
@@ -124,6 +132,9 @@ export default function ListaScreen() {
         Näytä suodatettu lista</Button>
       <StatusBar style="auto" />
 
+      <Button style={{width: 200 }} mode="contained" onPress={nollaaSuodattimet}>
+        Nollaa suodattimet</Button>
+      <StatusBar style="auto" />
 
       <FlatList 
         style={{ marginTop: 10, width: '90%'}}
