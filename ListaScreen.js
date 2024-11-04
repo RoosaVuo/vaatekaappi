@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import { Button, TextInput, Card } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
@@ -64,6 +64,24 @@ export default function ListaScreen() {
     setValittuTilaisuus('Kaikki');
     setValittuSijainti('Kaikki')
   }
+
+  const poistaVaate = async (key) => {
+    try {
+      await remove(ref(database, 'vaatteet/' + key));
+    } catch (error) {
+      Alert.alert('Virhe poistossa', error)
+    }
+}
+
+  const poistaNappi = (key) => 
+  Alert.alert('Haluatko varmasti poistaa vaatteen listalta?', 'Vaate poistetaan pysyvästi', [
+    {
+      text: 'Peruuta',
+      onPress: () => console.log('Poisto peruttu'),
+      style: 'cancel',
+    },
+    {text: 'POISTA', onPress: () => poistaVaate(key)},
+  ])
 
   return (
     <View style={styles.container}>    
@@ -147,6 +165,7 @@ export default function ListaScreen() {
               <Text variant="bodyMedium">Väri: {item.vari}</Text>
               <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
               <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
+              <Text style={{ color: '#0000ff' }} onPress={() => poistaNappi(item.keyId)}>Poista vaate</Text>
             </Card.Content>        
           </Card>
         }
