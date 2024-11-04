@@ -14,7 +14,7 @@ export default function ListaScreen() {
 
   const [vaateLista, setVaateLista] = useState([]);
   const [suodatettuVaateLista, setSuodatettuVaateLista] = useState([]);
-
+  
   const database = getDatabase(app);
 
   const pickerRef = useRef();
@@ -37,19 +37,17 @@ export default function ListaScreen() {
     })
   }, []);  
 
-  console.log(vaateLista);
   console.log(suodatettuVaateLista);
 
   const suodataLista = () => {
-    suodatettuVaateLista([]);
-
-    for (let i=0; i<vaateLista.length; i++) {
-      if (valittuTyyppi == vaateLista.at(i).tyyppi) {
-        suodatettuVaateLista.push(i);
-      }
-    }
+    setSuodatettuVaateLista(vaateLista.filter(vaate => vaate.tyyppi === valittuTyyppi || vaate.vari === valittuVari || vaate.tilaisuus === valittuTilaisuus || vaate.sijainti === valittuSijainti));
   };
 
+  //ChatGpt apuna virheenselvityksessä vaatelistan arvojen "kopioimisessa" ja suodattamisessa. virhe oli let muuttujan käyttämisessä, kun piti käyttää tilamuuttujaa. Aiemmin let suodatettuVaateLista 
+
+  const naytaLista = () => {
+    setSuodatettuVaateLista(vaateLista);
+  }
 
   return (
     <View style={styles.container}>    
@@ -109,6 +107,10 @@ export default function ListaScreen() {
         <Picker.Item label="Kaappi" value="Kaappi" />
         <Picker.Item label="Varasto" value="Varasto" />
       </Picker>
+
+      <Button style={{width: 200 }} mode="contained" onPress={naytaLista}>
+        Näytä koko lista</Button>
+      <StatusBar style="auto" />
 
       <Button style={{width: 200 }} mode="contained" onPress={suodataLista}>
         Näytä suodatettu lista</Button>
