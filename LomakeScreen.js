@@ -33,7 +33,7 @@ export default function LomakeScreen() {
   }
 
   const lisaaListalle = () => {
-    if (vaate.kuvaus) {
+    if (vaate.kuvaus && vaate.tyyppi && vaate.vari && vaate.tilaisuus && vaate.sijainti) {
       const uusiVaate = push(ref(database, 'vaatteet/'));
       const uusiKey = uusiVaate.key; 
   
@@ -53,20 +53,6 @@ export default function LomakeScreen() {
     }
   };
 
-  /*useEffect(() => {
-    const itemsRef = ref(database, 'vaatteet/');
-    onValue(itemsRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setVaateLista(Object.values(data));
-      } else {
-        setVaateLista([]); 
-      }
-    })
-  }, []);  
-
-  console.log(vaateLista); */
-
   return (
     <View style={styles.container}>
       <Text>Tänne lomake</Text>
@@ -83,6 +69,7 @@ export default function LomakeScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setVaate({...vaate, tyyppi: itemValue})
         }>
+        <Picker.Item label="Valitse" value="" />
         <Picker.Item label="Housut" value="Housut" />
         <Picker.Item label="Paita" value="Paita" />
         <Picker.Item label="Takki" value="Takki" />
@@ -96,6 +83,7 @@ export default function LomakeScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setVaate({...vaate, vari: itemValue})
         }>
+        <Picker.Item label="Valitse" value="" />
         <Picker.Item label="Punainen" value="Punainen" />
         <Picker.Item label="Musta" value="Musta" />
         <Picker.Item label="Keltainen" value="Keltainen" />
@@ -111,6 +99,7 @@ export default function LomakeScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setVaate({...vaate, tilaisuus: itemValue})
         }>
+        <Picker.Item label="Valitse" value="" />
         <Picker.Item label="Arki" value="Arki" />
         <Picker.Item label="Juhla" value="Juhla" />
         <Picker.Item label="Ulkoilu" value="Ulkoilu" />
@@ -124,6 +113,7 @@ export default function LomakeScreen() {
         onValueChange={(itemValue, itemIndex) =>
           setVaate({...vaate, sijainti: itemValue})
         }>
+        <Picker.Item label="Valitse" value="" />
         <Picker.Item label="Kaappi" value="Kaappi" />
         <Picker.Item label="Varasto" value="Varasto" />
       </Picker>
