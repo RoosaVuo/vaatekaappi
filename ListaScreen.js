@@ -94,7 +94,7 @@ export default function ListaScreen() {
           onValueChange={(itemValue, itemIndex) =>
             setValittuTyyppi(itemValue)
           }>
-          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Kaikki" value="" />
           <Picker.Item label="Housut" value="Housut" />
           <Picker.Item label="Paita" value="Paita" />
           <Picker.Item label="Takki" value="Takki" />
@@ -108,7 +108,7 @@ export default function ListaScreen() {
           onValueChange={(itemValue, itemIndex) =>
             setValittuVari(itemValue)
           }>
-          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Kaikki" value="" />
           <Picker.Item label="Punainen" value="Punainen" />
           <Picker.Item label="Musta" value="Musta" />
           <Picker.Item label="Keltainen" value="Keltainen" />
@@ -126,7 +126,7 @@ export default function ListaScreen() {
           onValueChange={(itemValue, itemIndex) =>
             setValittuTilaisuus(itemValue)
           }>
-          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Kaikki" value="" />
           <Picker.Item label="Arki" value="Arki" />
           <Picker.Item label="Juhla" value="Juhla" />
           <Picker.Item label="Ulkoilu" value="Ulkoilu" />
@@ -140,7 +140,7 @@ export default function ListaScreen() {
           onValueChange={(itemValue, itemIndex) =>
             setValittuSijainti(itemValue)
           }>
-          <Picker.Item label="Kaikki" value="Kaikki" />
+          <Picker.Item label="Kaikki" value="" />
           <Picker.Item label="Kaappi" value="Kaappi" />
           <Picker.Item label="Varasto" value="Varasto" />
         </Picker>
