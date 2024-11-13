@@ -5,6 +5,7 @@ import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, onValue, remove, set, push } from "firebase/database";
+import { CameraView, useCameraPermissions } from 'expo-camera';
 
 export default function LomakeScreen() {
 
