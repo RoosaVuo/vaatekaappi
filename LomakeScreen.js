@@ -24,6 +24,25 @@ export default function LomakeScreen() {
     sijainti: ''
   });
   const [vaateLista, setVaateLista] = useState([]);
+  const [permission, requestPermission] = useCameraPermissions();
+  const [kuvanNimi, setKuvanNimi] = useState('');
+  const [photoBase64, setPhotoBase64] = useState('');
+
+  if (!permission) {
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    return (
+      <View>
+        <Text style={styles.message}>Sovellus tarvitsee lupasi laitteen kameran käyttämiseksi</Text>
+        <Button style={{width: 200 }} mode="contained" onPress={requestPermission}>
+        Myönnä lupa
+        </Button>
+      <StatusBar style="auto" />
+      </View>
+    );
+  }
 
   const pickerRef = useRef();
   function open() {
@@ -125,6 +144,9 @@ export default function LomakeScreen() {
       <Button style={{width: 200 }} mode="contained" onPress={lisaaListalle}>
         Lisää listalle</Button>
       <StatusBar style="auto" />
+
+      <CameraView style={styles.camera} facing='back'>
+      </CameraView>
     </View>
   );
 }
@@ -143,5 +165,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 40,
     marginVertical: 10
+  },
+  camera: {
+    flex: 1,
+  },
+  message: {
+    textAlign: 'center',
+    paddingBottom: 10,
   },
 });
