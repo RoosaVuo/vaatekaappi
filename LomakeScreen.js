@@ -24,6 +24,8 @@ export default function LomakeScreen() {
     sijainti: ''
   });
   const [vaateLista, setVaateLista] = useState([]);
+  const [photoName, setPhotoName] = useState('');
+  const [photoBase64, setPhotoBase64] = useState('');
 
   const pickerRef = useRef();
   function open() {
@@ -121,6 +123,20 @@ export default function LomakeScreen() {
           <Picker.Item label="Varasto" value="Varasto" />
         </Picker>
       </View>
+
+      <Button style={{width: 200 }} mode="contained">
+        Ota kuva</Button>
+      
+        <View >
+          {photoName && photoBase64 ? (
+            <>
+              <Image style={{ flex: 1 }} source={{ uri: photoName }} />
+              <Image style={{ flex: 1 }} source={{ uri: `data:image/jpg;base64,${photoBase64}` }} />
+            </>
+          ) : (
+            <Text>No photo taken yet.</Text>
+          )}      
+        </View>
 
       <Button style={{width: 200 }} mode="contained" onPress={lisaaListalle}>
         Lisää listalle</Button>

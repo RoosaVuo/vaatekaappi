@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
-        flexDirection: 'row',
         backgroundColor: 'transparent',
         margin: 64,
+        marginTop: 650,
       },
       button: {
         flex: 1,
