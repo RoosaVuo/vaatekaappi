@@ -31,7 +31,7 @@ export default function CameraScreen() {
       setPhotoName(photo.uri);
       setPhotoBase64(photo.base64); 
     }
-    navigation.navigate('Lisää vaate');
+    navigation.navigate('Lisää vaate', {photoName: photoName, photoBase64: photoBase64});
   };
 
   return (
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'transparent',
         margin: 64,
-        marginTop: 650,
+        marginTop: 400,
       },
       button: {
         flex: 1,

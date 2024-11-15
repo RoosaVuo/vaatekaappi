@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, TextInput } from 'react-native-paper';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
@@ -8,7 +8,7 @@ import { getDatabase, ref, onValue, remove, set, push } from "firebase/database"
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function LomakeScreen() {
+export default function LomakeScreen({route}) {
 
   const database = getDatabase(app);
   const [kuvaus, setKuvaus] = useState();
@@ -25,9 +25,9 @@ export default function LomakeScreen() {
     sijainti: ''
   });
   const [vaateLista, setVaateLista] = useState([]);
-  const [photoName, setPhotoName] = useState('');
-  const [photoBase64, setPhotoBase64] = useState('');
+  const {photoName, photoBase64} = route.params;
   const navigation = useNavigation();
+
 
   const pickerRef = useRef();
   function open() {
@@ -129,7 +129,7 @@ export default function LomakeScreen() {
       <Button style={{width: 200 }} mode="contained" onPress={() => navigation.navigate('Kamera')}>
         Ota kuva</Button>
       
-        <View >
+        <View style={{height: 200 }}>
           {photoName && photoBase64 ? (
             <>
               <Image style={{ flex: 1 }} source={{ uri: photoName }} />
