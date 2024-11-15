@@ -7,6 +7,7 @@ import LomakeScreen from './LomakeScreen'
 import EtusivuScreen from './EtusivuScreen'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { app } from './firebaseConfig';
+import CameraScreen from './CameraScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +34,7 @@ export default function App() {
             <Tab.Screen name="Etusivu" component={EtusivuScreen} />
             <Tab.Screen name="Vaatelista" component={ListaScreen} />
             <Tab.Screen name="Lisää vaate" component={LomakeScreen} />
+            <Tab.Screen name="Kamera" component={CameraScreen} />
           </Tab.Navigator>
         </NavigationContainer>
   );
