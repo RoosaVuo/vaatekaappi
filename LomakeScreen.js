@@ -5,6 +5,7 @@ import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, onValue, remove, set, push } from "firebase/database";
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function LomakeScreen() {
@@ -26,6 +27,7 @@ export default function LomakeScreen() {
   const [vaateLista, setVaateLista] = useState([]);
   const [photoName, setPhotoName] = useState('');
   const [photoBase64, setPhotoBase64] = useState('');
+  const navigation = useNavigation();
 
   const pickerRef = useRef();
   function open() {
@@ -124,7 +126,7 @@ export default function LomakeScreen() {
         </Picker>
       </View>
 
-      <Button style={{width: 200 }} mode="contained">
+      <Button style={{width: 200 }} mode="contained" onPress={() => navigation.navigate('Kamera')}>
         Ota kuva</Button>
       
         <View >
