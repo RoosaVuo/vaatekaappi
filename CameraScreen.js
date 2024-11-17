@@ -4,6 +4,7 @@ import { StyleSheet, Button, Text, TouchableOpacity, View, Alert, Image } from '
 import { useState, useRef, useEffect } from 'react';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
+import * as FileSystem from 'expo-file-system';
 
 export default function CameraScreen() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -27,14 +28,23 @@ export default function CameraScreen() {
   //Chat gpt neuvoi, että tilamuuttuja on tässä turha, kun photo.urin voi välittää suoraan parametrinä
   //ChatGpt kysyin neuvoa kuvan tallentamisesta ja sain ohjeen, että kuva kannattaa tallentaa laitteelle tai firebase storageen. base65 on sen verran iso, että ei kannata välittää parametrinä.
   // Yksi vaihtoehto välittää vain photo.uri ja convertoida se toisella sivulla. 
-
+  // luin ohjeita, mutta ne eivät tuntuneet täysin järkeviltä vaan sovelsin omaan koodiin
   const snap = async () => {
     if (camera) {
       const photo = await camera.current.takePictureAsync({base64: true});
       setPhotoBase64(photo.base64); 
-    }
-    navigation.navigate('Lisää vaate', {photoName: photo.uri});
-  };
+      const tiedostoUri = `${FileSystem.documentDirectory}photo.jpg`;
+      try {
+        await FileSystem.copyAsync({
+          from: photo.uri,
+          to: tiedostoUri,
+          }); 
+      } catch (error) {
+          console.error('Virhe tallennuksessa:', error);
+        };
+      }
+      navigation.navigate('Lisää vaate', {photoName: tiedostoUri});
+    };
 
   return (
     <View style={styles.container}>

@@ -6,11 +6,14 @@ import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, onValue, remove, set, push } from "firebase/database";
 import { useNavigation } from '@react-navigation/native';
+import * as FileSystem from 'expo-file-system';
 
 
 export default function LomakeScreen({route}) {
 
   const database = getDatabase(app);
+  const {tiedostoUri} = route.params;
+  const navigation = useNavigation();
   const [kuvaus, setKuvaus] = useState();
   const [valittuTyyppi, setValittuTyyppi] = useState();
   const [valittuVari, setValittuVari] = useState();
@@ -22,12 +25,9 @@ export default function LomakeScreen({route}) {
     tyyppi: '',
     vari: '',
     tilaisuus: '',
-    sijainti: ''
+    sijainti: '',
+    kuvaUri: '',
   });
-  const [vaateLista, setVaateLista] = useState([]);
-  const {photoName} = route.params;
-  const navigation = useNavigation();
-
 
   const pickerRef = useRef();
   function open() {
@@ -48,7 +48,8 @@ export default function LomakeScreen({route}) {
         tyyppi: vaate.tyyppi,
         vari: vaate.vari,
         tilaisuus: vaate.tilaisuus,
-        sijainti: vaate.sijainti
+        sijainti: vaate.sijainti,
+        kuvaUri: tiedostoUri
       })
       .catch((error) => {
         console.error('Virhe tallennuksessa:', error);
@@ -130,10 +131,9 @@ export default function LomakeScreen({route}) {
         Ota kuva</Button>
       
         <View style={{height: 200 }}>
-          {photoName && photoBase64 ? (
+          {tiedostoUri ? (
             <>
-              <Image style={{ flex: 1 }} source={{ uri: photoName }} />
-              <Image style={{ flex: 1 }} source={{ uri: `data:image/jpg;base64,${photoBase64}` }} />
+              <Image style={{ width: 100, height: 100 }} source={{ uri: tiedostoUri }} />
             </>
           ) : (
             <Text>No photo taken yet.</Text>

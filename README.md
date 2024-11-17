@@ -10,4 +10,4 @@ Käyttötarkoituksia:
 
 -  Vähän käytetyille vaatteille voi asettaa muistutuksen laitteen kalenteriin. Kalenterimuistutus muistuttaa viemään vaatteen keräykseen tai kierrätykseen, jos sitä ei ole käytetty. (Jos vaatetta käyttää, muistutuksen voi poistaa)
 
-Käytettävät teknologiat: React native (picker), React native paper (ainakin textinput, card, button), React navigation, Firebase-realtime database, Expo SDK-laitteen kamera ja kalenteri.
+Käytettävät teknologiat: React native (picker), Filesystem, React native paper (ainakin textinput, card, button), React navigation, Firebase-realtime database, Expo SDK-laitteen kamera ja kalenteri.
