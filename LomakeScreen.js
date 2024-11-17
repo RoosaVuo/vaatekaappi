@@ -25,7 +25,7 @@ export default function LomakeScreen({route}) {
     sijainti: ''
   });
   const [vaateLista, setVaateLista] = useState([]);
-  const {photoName, photoBase64} = route.params;
+  const {photoName} = route.params;
   const navigation = useNavigation();
 
 
