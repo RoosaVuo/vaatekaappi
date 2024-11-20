@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert, Image } from 'react-native';
 import { Button, TextInput, Card } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
@@ -174,6 +174,15 @@ export default function ListaScreen() {
               <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
               <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
               <Text style={{ color: '#0000ff' }} onPress={() => poistaNappi(item.keyId)}>Poista vaate</Text>
+              <View>
+                {item.kuvaUri ? (
+                  <>
+                    <Image style={{ width: 100, height: 150 }} source={{ uri: item.kuvaUri }} />
+                  </>
+                ) : (
+                  <Text>Ei kuvaa</Text>
+                )}      
+              </View>
             </Card.Content>        
           </Card>
         }

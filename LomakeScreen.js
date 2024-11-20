@@ -126,13 +126,13 @@ export default function LomakeScreen({route}) {
       <Button style={{width: 200 }} mode="contained" onPress={() => navigation.navigate('Kamera')}>
         Ota kuva</Button>
       
-        <View style={{height: 200 }}>
+        <View>
           {tiedostoUri ? (
             <>
-              <Image style={{ width: 100, height: 100 }} source={{ uri: tiedostoUri }} />
+              <Image style={{ width: 100, height: 150 }} source={{ uri: tiedostoUri }} />
             </>
           ) : (
-            <Text>No photo taken yet.</Text>
+            <Text>Ei kuvaa</Text>
           )}      
         </View>
 
