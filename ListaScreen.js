@@ -59,10 +59,10 @@ export default function ListaScreen() {
 
   const nollaaSuodattimet = () => {
     setSuodatettuVaateLista(vaateLista);
-    setValittuTyyppi('Kaikki');
-    setValittuVari('Kaikki');
-    setValittuTilaisuus('Kaikki');
-    setValittuSijainti('Kaikki')
+    setValittuTyyppi('Kaikki tyypit');
+    setValittuVari('Kaikki värit');
+    setValittuTilaisuus('Kaikki tilaisuudet');
+    setValittuSijainti('Kaikki sijainnit')
   }
 
   const poistaVaate = async (key) => {
@@ -85,65 +85,63 @@ export default function ListaScreen() {
 
   return (
     <View style={styles.container}>    
-      <Text>Suodata vaatteita</Text> 
+      <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Suodata vaatteita</Text> 
       <View style={styles.picker}>
-        <Picker
-          style={{width: 150}}
-          ref={pickerRef}
-          selectedValue={valittuTyyppi}
-          onValueChange={(itemValue, itemIndex) =>
-            setValittuTyyppi(itemValue)
-          }>
-          <Picker.Item label="Kaikki" value="" />
-          <Picker.Item label="Housut" value="Housut" />
-          <Picker.Item label="Paita" value="Paita" />
-          <Picker.Item label="Takki" value="Takki" />
-          <Picker.Item label="Mekko" value="Mekko" />
-        </Picker> 
-
-        <Picker
-          style={{width: 150}}
-          ref={pickerRef}
-          selectedValue={valittuVari}
-          onValueChange={(itemValue, itemIndex) =>
-            setValittuVari(itemValue)
-          }>
-          <Picker.Item label="Kaikki" value="" />
-          <Picker.Item label="Punainen" value="Punainen" />
-          <Picker.Item label="Musta" value="Musta" />
-          <Picker.Item label="Keltainen" value="Keltainen" />
-          <Picker.Item label="Vihreä" value="Vihreä" />
-          <Picker.Item label="Sininen" value="Sininen" />
-          <Picker.Item label="Valkoinen" value="Valkoinen" />
-        </Picker> 
+          <Picker
+            style={{width: 200}}
+            ref={pickerRef}
+            selectedValue={valittuTyyppi}
+            onValueChange={(itemValue, itemIndex) =>
+              setValittuTyyppi(itemValue)
+            }>
+            <Picker.Item label="Kaikki tyypit" value="" />
+            <Picker.Item label="Housut" value="Housut" />
+            <Picker.Item label="Paita" value="Paita" />
+            <Picker.Item label="Takki" value="Takki" />
+            <Picker.Item label="Mekko" value="Mekko" />
+          </Picker> 
+          <Picker
+            style={{width: 200}}
+            ref={pickerRef}
+            selectedValue={valittuVari}
+            onValueChange={(itemValue, itemIndex) =>
+              setValittuVari(itemValue)
+            }>
+            <Picker.Item label="Kaikki värit" value="" />
+            <Picker.Item label="Punainen" value="Punainen" />
+            <Picker.Item label="Musta" value="Musta" />
+            <Picker.Item label="Keltainen" value="Keltainen" />
+            <Picker.Item label="Vihreä" value="Vihreä" />
+            <Picker.Item label="Sininen" value="Sininen" />
+            <Picker.Item label="Valkoinen" value="Valkoinen" />
+          </Picker> 
       </View>
 
       <View style={styles.picker}>
-        <Picker
-          style={{width: 150}}
-          ref={pickerRef}
-          selectedValue={valittuTilaisuus}
-          onValueChange={(itemValue, itemIndex) =>
-            setValittuTilaisuus(itemValue)
-          }>
-          <Picker.Item label="Kaikki" value="" />
-          <Picker.Item label="Arki" value="Arki" />
-          <Picker.Item label="Juhla" value="Juhla" />
-          <Picker.Item label="Ulkoilu" value="Ulkoilu" />
-          <Picker.Item label="Urheilu" value="Urheilu" />
+          <Picker
+            style={{width: 200}}
+            ref={pickerRef}
+            selectedValue={valittuTilaisuus}
+            onValueChange={(itemValue, itemIndex) =>
+              setValittuTilaisuus(itemValue)
+            }>
+            <Picker.Item label="Kaikki tilaisuudet" value="" />
+            <Picker.Item label="Arki" value="Arki" />
+            <Picker.Item label="Juhla" value="Juhla" />
+            <Picker.Item label="Ulkoilu" value="Ulkoilu" />
+            <Picker.Item label="Urheilu" value="Urheilu" />
         </Picker> 
-
-        <Picker
-          style={{width: 150}}
-          ref={pickerRef}
-          selectedValue={valittuSijainti}
-          onValueChange={(itemValue, itemIndex) =>
-            setValittuSijainti(itemValue)
-          }>
-          <Picker.Item label="Kaikki" value="" />
-          <Picker.Item label="Kaappi" value="Kaappi" />
-          <Picker.Item label="Varasto" value="Varasto" />
-        </Picker>
+          <Picker
+            style={{width: 200}}
+            ref={pickerRef}
+            selectedValue={valittuSijainti}
+            onValueChange={(itemValue, itemIndex) =>
+              setValittuSijainti(itemValue)
+            }>
+            <Picker.Item label="Kaikki sijainnit" value="" />
+            <Picker.Item label="Kaappi" value="Kaappi" />
+            <Picker.Item label="Varasto" value="Varasto" />
+          </Picker>
       </View>
 
       <View style={styles.buttons}>
@@ -167,21 +165,23 @@ export default function ListaScreen() {
         data={suodatettuVaateLista}
         renderItem={({item}) => 
           <Card style={{ marginBottom: 10 }}>
-            <Card.Title title={item.kuvaus} />
-            <Card.Content>
-              <Text variant="bodyMedium">Vaatteen tyyppi: {item.tyyppi}</Text>
-              <Text variant="bodyMedium">Väri: {item.vari}</Text>
-              <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
-              <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
-              <Text style={{ color: '#0000ff' }} onPress={() => poistaNappi(item.keyId)}>Poista vaate</Text>
+            <Card.Title title={item.kuvaus}/>
+            <Card.Content style={styles.card}>
               <View>
-                {item.kuvaUri ? (
-                  <>
-                    <Image style={{ width: 100, height: 150 }} source={{ uri: item.kuvaUri }} />
-                  </>
-                ) : (
-                  <Text>Ei kuvaa</Text>
-                )}      
+                <Text variant="bodyMedium">Vaatteen tyyppi: {item.tyyppi}</Text>
+                <Text variant="bodyMedium">Väri: {item.vari}</Text>
+                <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
+                <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
+                <Text style={{ color: '#0000ff' }} onPress={() => poistaNappi(item.keyId)}>Poista vaate</Text>
+              </View>
+              <View style={{ paddingLeft: 20}}>
+                  {item.kuvaUri ? (
+                    <>
+                      <Image style={{ width: 100, height: 150 }} source={{ uri: item.kuvaUri }} />
+                    </>
+                  ) : (
+                    <Text>Ei kuvaa</Text>
+                  )}      
               </View>
             </Card.Content>        
           </Card>
@@ -204,7 +204,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
-    marginVertical: 10
+    marginVertical: 10,
+    marginTop: 30
+
   },
   buttons: {
     flexDirection: 'row',
@@ -215,4 +217,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginBottom: 30
   },
+  card: {
+    flexDirection: 'row',
+  }
 });
