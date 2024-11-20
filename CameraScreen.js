@@ -29,22 +29,29 @@ export default function CameraScreen() {
   //ChatGpt kysyin neuvoa kuvan tallentamisesta ja sain ohjeen, että kuva kannattaa tallentaa laitteelle tai firebase storageen. base65 on sen verran iso, että ei kannata välittää parametrinä.
   // Yksi vaihtoehto välittää vain photo.uri ja convertoida se toisella sivulla. 
   // luin ohjeita, mutta ne eivät tuntuneet täysin järkeviltä vaan sovelsin omaan koodiin
-  const snap = async () => {
-    if (camera) {
-      const photo = await camera.current.takePictureAsync({base64: true});
-      setPhotoBase64(photo.base64); 
-      const tiedostoUri = `${FileSystem.documentDirectory}photo.jpg`;
-      try {
-        await FileSystem.copyAsync({
-          from: photo.uri,
-          to: tiedostoUri,
-          }); 
-      } catch (error) {
-          console.error('Virhe tallennuksessa:', error);
-        };
-      }
-      navigation.navigate('Lisää vaate', {photoName: tiedostoUri});
-    };
+  // virheilmoitus "possible unhandled promise rejection (id:0)..." chatgpt avulla sain lisättyä oikeat try -catch yhdistelmät, jolla tunnistaa virheet
+   const snap = async () => {
+    try {
+      if (camera.current) {
+        const photo = await camera.current.takePictureAsync({base64: true});
+        setPhotoBase64(photo.base64); 
+        const tiedostoUri = `${FileSystem.documentDirectory}photo.jpg`;
+        try {
+          await FileSystem.copyAsync({
+            from: photo.uri,
+            to: tiedostoUri,
+            }); 
+        } catch (fileError) {
+            console.error('Virhe tallennuksessa:', fileError);
+          };
+          navigation.navigate('Lisää vaate', {photoName: tiedostoUri});
+        } else {
+          console.log('Kameraa ei alustettu')
+        }  
+    } catch (cameraError) {
+      console.error('virhe kuvan ottamisessa:' , cameraError)
+    }
+  };
 
   return (
     <View style={styles.container}>
