@@ -35,7 +35,7 @@ export default function CameraScreen() {
       if (camera.current) {
         const photo = await camera.current.takePictureAsync({base64: true});
         setPhotoBase64(photo.base64); 
-        const tiedostoUri = `${FileSystem.documentDirectory}photo.jpg`;
+        const tiedostoUri = `${FileSystem.documentDirectory}photo_${Date.now()}.jpg`;
         try {
           await FileSystem.copyAsync({
             from: photo.uri,
@@ -44,7 +44,7 @@ export default function CameraScreen() {
         } catch (fileError) {
             console.error('Virhe tallennuksessa:', fileError);
           };
-          navigation.navigate('Lisää vaate', {photoName: tiedostoUri});
+          navigation.navigate('Lisää vaate', { tiedostoUri});
         } else {
           console.log('Kameraa ei alustettu')
         }  

@@ -12,13 +12,9 @@ import * as FileSystem from 'expo-file-system';
 export default function LomakeScreen({route}) {
 
   const database = getDatabase(app);
-  const {tiedostoUri} = route.params;
+  const {tiedostoUri} = route.params || {};
+  //chatgpt apuna virheentunnistuksessa -> ||{} puuttui määrityksestä ja sen takia undefined virheviesti, eikä lomaketta saanut auki ennen kuvaa.
   const navigation = useNavigation();
-  const [kuvaus, setKuvaus] = useState();
-  const [valittuTyyppi, setValittuTyyppi] = useState();
-  const [valittuVari, setValittuVari] = useState();
-  const [valittuTilaisuus, setValittuTilaisuus] = useState();
-  const [valittuSijainti, setValittuSijainti] = useState();
   const [vaate, setVaate] = useState({
     keyId: '',
     kuvaus: '',
