@@ -45,7 +45,7 @@ export default function LomakeScreen({route}) {
         vari: vaate.vari,
         tilaisuus: vaate.tilaisuus,
         sijainti: vaate.sijainti,
-        kuvaUri: tiedostoUri
+        kuvaUri: tiedostoUri || null
       })
       .catch((error) => {
         console.error('Virhe tallennuksessa:', error);
