@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, TextInput } from 'react-native-paper';
-import { StyleSheet, Text, View, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image, Platform, Keyboard} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
@@ -26,12 +26,6 @@ export default function LomakeScreen({route}) {
   });
 
   const pickerRef = useRef();
-  function open() {
-    pickerRef.current.focus();
-  }
-  function close() {
-    pickerRef.current.blur();
-  }
 
   const lisaaListalle = () => {
     if (vaate.kuvaus && vaate.tyyppi && vaate.vari && vaate.tilaisuus && vaate.sijainti) {
@@ -71,6 +65,7 @@ export default function LomakeScreen({route}) {
         label="Vaate"
         onChangeText={text => setVaate({...vaate, kuvaus: text})}
         value={vaate.kuvaus}
+        onEndEditing={() => Keyboard.dismiss()}
       />
       <View style={styles.picker}>
           <Picker
@@ -130,7 +125,7 @@ export default function LomakeScreen({route}) {
           </Picker>
       </View>
 
-      <Button style={{width: 200 }} mode="contained" onPress={() => navigation.navigate('Kamera')}>
+      <Button style={styles.button} mode="contained" onPress={() => navigation.navigate('Kamera')}>
         Ota kuva</Button>
       
         <View>
@@ -143,33 +138,54 @@ export default function LomakeScreen({route}) {
           )}      
         </View>
 
-      <Button style={{width: 200 }} mode="contained" onPress={lisaaListalle}>
+      <Button style={styles.button} mode="contained" onPress={lisaaListalle}>
         Lisää listalle</Button>
       <StatusBar style="auto" />
     </View>
   );
 }
 
+// chatgpt neuvoilla paltformin käyttö 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    ...Platform.select({
+      android: {
+        justifyContent: 'center',
+      },
+      ios: {
+        justifyContent: 'top',
+      },
+      default: {
+        justifyContent: 'center',
+      }
+    })
   },
   picker: {
     flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    ...Platform.select({
+      android: {
+        marginTop: 0,
+      },
+      ios: {
+        marginTop: 50,
+      },
+      default: {
+        marginTop: 0,
+      }
+    }),
+    height: 20,
     marginVertical: 10
   },
-  camera: {
-    flex: 1,
-  },
-  message: {
-    textAlign: 'center',
-    paddingBottom: 10,
-  },
+  button: {
+    marginTop: 10,
+    marginBottom: 10,
+    width: 200,
+  }
 });

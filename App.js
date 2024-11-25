@@ -34,8 +34,9 @@ export default function App() {
             <Tab.Screen name="Etusivu" component={EtusivuScreen} />
             <Tab.Screen name="Vaatelista" component={ListaScreen} />
             <Tab.Screen name="Lisää vaate" component={LomakeScreen} />
-            <Tab.Screen name="Kamera" component={CameraScreen} />
+            <Tab.Screen name="Kamera" component={CameraScreen}/>
           </Tab.Navigator>
+
         </NavigationContainer>
   );
 }
