@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, TextInput } from 'react-native-paper';
 import { StyleSheet, Text, View, Alert, Image, Platform, Keyboard} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
-import { useState, useRef, useEffect } from 'react';
+import { Picker } from '@react-native-picker/picker';
+import { useState, useRef } from 'react';
 import { app } from './firebaseConfig';
-import { getDatabase, ref, onValue, remove, set, push } from "firebase/database";
+import { getDatabase, ref, set, push } from "firebase/database";
 import { useNavigation } from '@react-navigation/native';
 import * as FileSystem from 'expo-file-system';
 
@@ -24,7 +24,6 @@ export default function LomakeScreen({route}) {
     sijainti: '',
     kuvaUri: '',
   });
-
   const pickerRef = useRef();
 
   const lisaaListalle = () => {
@@ -50,12 +49,26 @@ export default function LomakeScreen({route}) {
           text: 'Siirry listalle',
           onPress: () => navigation.navigate('Vaatelista'),
         },
-        {text: 'lisää uusi vaate', onPress: () => navigation.navigate('Lisää vaate')},
+        {text: 'lisää uusi vaate', onPress: () => lisaaUusiVaate()},
       ])      
     } else {
       Alert.alert('Error', 'Täytä kaikki tiedot');
     }
   };
+
+  const lisaaUusiVaate = () => {
+    setVaate({
+      keyId: '',
+      kuvaus: '',
+      tyyppi: '',
+      vari: '',
+      tilaisuus: '',
+      sijainti: '',
+      kuvaUri: '',
+    });
+    navigation.navigate('Lisää vaate')
+
+  }
 
   return (
     <View style={styles.container}>
