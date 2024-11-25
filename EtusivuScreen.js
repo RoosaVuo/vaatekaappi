@@ -1,13 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function EtusivuScreen() {
   return (
     <View style={styles.container}>
-      <Text>Tervetuloa käyttämään vaatekaappi-sovellusta!</Text>
-      <Text>Voit tallentaa tänne vaatteita ja sen jälkeen näet listauksen vaatteista.</Text>
-      <Text>Voit suodattaa listaa esimerkiksi värin tai tilaisuuden mukaan.</Text>
-      <StatusBar style="auto" />
+      <View style={styles.tekstilaatikko}>
+        <Text style={styles.otsikko}>Tervetuloa käyttämään vaatekaappi-sovellusta! {'\n'}</Text>
+        
+        <Text>Voit hyödyntää vaatelistaa esimerkiksi ostoksilla ja suodattaa listaa mm. värin tai tilaisuuden mukaan. {'\n'} {'\n'}
+          Aloita vaatteiden lisääminen ottamalla kuva tai lisäämällä vaatteen tiedot.</Text>
+      </View>
     </View>
   );
 }
@@ -19,4 +20,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  tekstilaatikko: {
+    margin: 20,
+    alignItems: 'center'
+
+  },
+  otsikko: {
+    fontSize: 19,
+    fontWeight: 'bold',
+  }
 });

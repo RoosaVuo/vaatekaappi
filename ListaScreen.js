@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, Alert, Image } from 'react-native';
-import { Button, TextInput, Card } from 'react-native-paper';
-import {Picker} from '@react-native-picker/picker';
+import { Button, Card } from 'react-native-paper';
+import { Picker } from '@react-native-picker/picker';
 import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
-import { getDatabase, ref, onValue, remove, set, setPriority } from "firebase/database";
+import { getDatabase, ref, onValue, remove, } from "firebase/database";
 
 export default function ListaScreen() {
   const [valittuTyyppi, setValittuTyyppi] = useState();
@@ -16,14 +16,7 @@ export default function ListaScreen() {
   const [suodatettuVaateLista, setSuodatettuVaateLista] = useState([]);
   
   const database = getDatabase(app);
-
   const pickerRef = useRef();
-  function open() {
-    pickerRef.current.focus();
-  }
-  function close() {
-    pickerRef.current.blur();
-  }
 
   useEffect(() => {
     const itemsRef = ref(database, 'vaatteet/');
@@ -152,10 +145,10 @@ export default function ListaScreen() {
           <Button style={{width: 200 }} mode="contained" onPress={suodataLista}>
             Näytä suodatettu lista</Button>
           <StatusBar style="auto" />
-
           <Button style={{width: 200 }} onPress={nollaaSuodattimet}>
             Nollaa suodattimet</Button>
         </View>
+        <StatusBar style="auto" />
       </View>
 
       <StatusBar style="auto" />

@@ -145,7 +145,7 @@ export default function LomakeScreen({route}) {
   );
 }
 
-// chatgpt neuvoilla paltformin käyttö 
+// chatgpt neuvoilla ja documentaatiolla paltformin käyttö 
 
 const styles = StyleSheet.create({
   container: {

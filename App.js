@@ -1,12 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import ListaScreen from './ListaScreen'
 import LomakeScreen from './LomakeScreen'
 import EtusivuScreen from './EtusivuScreen'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { app } from './firebaseConfig';
 import CameraScreen from './CameraScreen';
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +14,7 @@ export default function App() {
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({route}) => ({
-              tabBarIcon: ({ focused, color, size}) => {
+              tabBarIcon: ({ color, size}) => {
                 let iconName;
 
                 if(route.name === 'Etusivu') {
@@ -26,6 +23,8 @@ export default function App() {
                   iconName = 'list';
                 } else if (route.name === 'Lisää vaate'){
                   iconName = 'add-circle';
+                } else if (route.name === 'Kamera'){
+                  iconName = 'camera';
                 }
                 return <Ionicons name={iconName} size={size} color={color} />
               },
@@ -41,11 +40,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
