@@ -51,7 +51,6 @@ export default function ListaScreen() {
   
   const naytaLista = () => {
     setSuodatettuVaateLista(vaateLista);
-    setSuodatettuVaateLista(vaateLista);
     setValittuTyyppi('');
     setValittuVari('');
     setValittuTilaisuus('');
