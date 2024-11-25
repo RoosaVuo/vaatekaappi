@@ -47,7 +47,7 @@ export default function LomakeScreen({route}) {
       Alert.alert('Haluatko siirtyä listalle?',  '',[
         {
           text: 'Siirry listalle',
-          onPress: () => navigation.navigate('Vaatelista'),
+          onPress: () => siirryListalle()
         },
         {text: 'lisää uusi vaate', onPress: () => lisaaUusiVaate()},
       ])      
@@ -55,6 +55,20 @@ export default function LomakeScreen({route}) {
       Alert.alert('Error', 'Täytä kaikki tiedot');
     }
   };
+
+  const siirryListalle = () => {
+    setVaate({
+      keyId: '',
+      kuvaus: '',
+      tyyppi: '',
+      vari: '',
+      tilaisuus: '',
+      sijainti: '',
+      kuvaUri: '',
+    });
+    navigation.navigate('Vaatelista')
+  }
+
 
   const lisaaUusiVaate = () => {
     setVaate({
@@ -67,7 +81,6 @@ export default function LomakeScreen({route}) {
       kuvaUri: '',
     });
     navigation.navigate('Lisää vaate')
-
   }
 
   return (
