@@ -24,13 +24,16 @@ export default function ListaScreen() {
       const data = snapshot.val();
       if (data) {
         setVaateLista(Object.values(data));
+        setSuodatettuVaateLista(Object.values(data));
       } else {
         setVaateLista([]); 
       }
     })
   }, []);  
 
-  console.log(suodatettuVaateLista);
+  console.log("suodatettu: " + suodatettuVaateLista);
+  console.log("vaatelista: " + vaateLista)
+  console.log(valittuTyyppi);
 
   const suodataLista = () => {
     setSuodatettuVaateLista(vaateLista.filter(vaate => {
@@ -48,14 +51,11 @@ export default function ListaScreen() {
   
   const naytaLista = () => {
     setSuodatettuVaateLista(vaateLista);
-  }
-
-  const nollaaSuodattimet = () => {
     setSuodatettuVaateLista(vaateLista);
-    setValittuTyyppi('Kaikki tyypit');
-    setValittuVari('Kaikki värit');
-    setValittuTilaisuus('Kaikki tilaisuudet');
-    setValittuSijainti('Kaikki sijainnit')
+    setValittuTyyppi('');
+    setValittuVari('');
+    setValittuTilaisuus('');
+    setValittuSijainti('');
   }
 
   const poistaVaate = async (key) => {
@@ -67,7 +67,7 @@ export default function ListaScreen() {
 }
 
   const poistaNappi = (key) => 
-  Alert.alert('Haluatko varmasti poistaa vaatteen listalta?', 'Vaate poistetaan pysyvästi', [
+  Alert.alert('Haluatko varmasti poistaa vaatteen listalta?', 'Vaate poistetaan pysyvästi ja siirryt takaisin koko listaan', [
     {
       text: 'Peruuta',
       onPress: () => console.log('Poisto peruttu'),
@@ -145,41 +145,38 @@ export default function ListaScreen() {
           <Button style={{width: 200 }} mode="contained" onPress={suodataLista}>
             Näytä suodatettu lista</Button>
           <StatusBar style="auto" />
-          <Button style={{width: 200 }} onPress={nollaaSuodattimet}>
-            Nollaa suodattimet</Button>
         </View>
         <StatusBar style="auto" />
       </View>
 
       <StatusBar style="auto" />
-
-      <FlatList 
-        style={{ marginTop: 10, width: '90%'}}
-        data={suodatettuVaateLista}
-        renderItem={({item}) => 
-          <Card style={{ marginBottom: 10 }}>
-            <Card.Title title={item.kuvaus}/>
-            <Card.Content style={styles.card}>
-              <View>
-                <Text variant="bodyMedium">Vaatteen tyyppi: {item.tyyppi}</Text>
-                <Text variant="bodyMedium">Väri: {item.vari}</Text>
-                <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
-                <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
-                <Text style={{ color: '#0000ff' }} onPress={() => poistaNappi(item.keyId)}>Poista vaate</Text>
-              </View>
-              <View style={{ paddingLeft: 20}}>
-                  {item.kuvaUri ? (
-                    <>
-                      <Image style={{ width: 100, height: 150 }} source={{ uri: item.kuvaUri }} />
-                    </>
-                  ) : (
-                    <Text>Ei kuvaa</Text>
-                  )}      
-              </View>
-            </Card.Content>        
-          </Card>
-        }
-      />
+        <FlatList 
+          style={{ marginTop: 10, width: '90%'}}
+          data={suodatettuVaateLista}
+          renderItem={({item}) => 
+            <Card style={{ marginBottom: 10 }}>
+              <Card.Title title={item.kuvaus}/>
+              <Card.Content style={styles.card}>
+                <View>
+                  <Text variant="bodyMedium">Vaatteen tyyppi: {item.tyyppi}</Text>
+                  <Text variant="bodyMedium">Väri: {item.vari}</Text>
+                  <Text variant="bodyMedium">Tilaisuus: {item.tilaisuus}</Text>
+                  <Text variant="bodyMedium">Sijainti: {item.sijainti}</Text>
+                  <Text style={{ color: '#0000ff' }} onPress={() => poistaNappi(item.keyId)}>Poista vaate</Text>
+                </View>
+                <View style={{ paddingLeft: 20}}>
+                    {item.kuvaUri ? (
+                      <>
+                        <Image style={{ width: 100, height: 150  }} source={{ uri: item.kuvaUri }} />
+                      </>
+                    ) : (
+                      <Text>Ei kuvaa</Text>
+                    )}      
+                </View>
+              </Card.Content>        
+            </Card>
+          }
+        />
     </View>
   );
 }

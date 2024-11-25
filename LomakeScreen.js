@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, TextInput } from 'react-native-paper';
 import { StyleSheet, Text, View, Alert, Image, Platform, Keyboard} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, set, push } from "firebase/database";
 import { useNavigation } from '@react-navigation/native';
@@ -144,7 +144,7 @@ export default function LomakeScreen({route}) {
         <View>
           {tiedostoUri ? (
             <>
-              <Image style={{ width: 100, height: 150 }} source={{ uri: tiedostoUri }} />
+              <Image style={{ width: 150, height: 200 }} source={{ uri: tiedostoUri }} />
             </>
           ) : (
             <Text>Ei kuvaa</Text>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
       }
     }),
-    height: 20,
+    height: 40,
     marginVertical: 10
   },
   button: {

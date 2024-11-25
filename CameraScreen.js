@@ -17,7 +17,8 @@ export default function CameraScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>Sovellus tarvitsee luvan kameran käyttämiselle</Text>
-        <Button onPress={requestPermission} title="Myönnä lupa" />
+        <Button  mode="contained" onPress={requestPermission}>
+        Myönnä lupa</Button>
       </View>
     );
   }
