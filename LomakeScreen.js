@@ -50,7 +50,7 @@ export default function LomakeScreen({route}) {
         {text: 'lisää uusi vaate', onPress: () => lisaaUusiVaate()},
       ])      
     } else {
-      Alert.alert('Error', 'Täytä kaikki tiedot');
+      Alert.alert('Virhe', 'Täytä kaikki tiedot');
     }
   };
 
@@ -62,7 +62,7 @@ export default function LomakeScreen({route}) {
       vari: '',
       tilaisuus: '',
       sijainti: '',
-      kuvaUri: null,
+      kuvaUri: '',
     });
     navigation.navigate('Vaatelista')
   }
