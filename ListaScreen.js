@@ -152,6 +152,7 @@ export default function ListaScreen() {
         <FlatList 
           style={{ marginTop: 10, width: '90%'}}
           data={suodatettuVaateLista}
+          ListEmptyComponent={<Text style={{textAlign: 'center'}}>Ei vaatteita</Text>}
           renderItem={({item}) => 
             <Card style={{ marginBottom: 10 }}>
               <Card.Title title={item.kuvaus}/>
