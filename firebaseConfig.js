@@ -1,13 +1,14 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAIAEA3-4wuGPaPGvOCAhOYtohGgIxkOr4",
-  authDomain: "vaatekaappi-46e51.firebaseapp.com",
-  databaseURL: "https://vaatekaappi-46e51-default-rtdb.firebaseio.com",
-  projectId: "vaatekaappi-46e51",
-  storageBucket: "vaatekaappi-46e51.firebasestorage.app",
-  messagingSenderId: "763478710100",
-  appId: "1:763478710100:web:a3092e39e12e21b1bb1ac1"
+  apiKey: "AIzaSyDD0mv4UZrDnNAk9z3mnPpC0-5qQoyfVyM",
+  authDomain: "vaatekaappi2.firebaseapp.com",
+  databaseURL: "https://vaatekaappi2-default-rtdb.firebaseio.com",
+  projectId: "vaatekaappi2",
+  storageBucket: "vaatekaappi2.firebasestorage.app",
+  messagingSenderId: "599055270233",
+  appId: "1:599055270233:web:5998405b8b9e4fa55e8c48"
 };
+
 
 const app = initializeApp(firebaseConfig);
