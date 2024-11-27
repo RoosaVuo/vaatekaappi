@@ -1,13 +1,7 @@
-##Suunnitelma
+### Suunnitelma
 
-Projektin toiminnot: Sovellukseen tallennetaan omia vaatteita ja niille erilaisia tunnisteita, kuten tyyppi, väri ja tilaisuus (arki/juhla). Vaatteen lisäämisen yhteydessä siitä otetaan kuva laitteen kameralla.
+Sovellukseen tallennetaan omia vaatteita ja niille erilaisia tunnisteita, kuten tyyppi, väri ja tilaisuus (arki/juhla). Vaatteen lisäämisen yhteydessä siitä otetaan kuva laitteen kameralla. Sovellus listaa vaatteet ja niitä voi suodattaa eri tekijöillä.
 
-Käyttötarkoituksia:
+## Teknologiat
 
--  Sadetakki hukassa? Sovelluksella voi tarkastaa onko vaaten merkitty sijaitsevan kaapissa vai varastossa
-
--  Ostoksilla voi tarkastaa montako sinistä t-paitaa omistaa ennen kuin ostaa uuden.
-
--  Vähän käytetyille vaatteille voi asettaa muistutuksen laitteen kalenteriin. Kalenterimuistutus muistuttaa viemään vaatteen keräykseen tai kierrätykseen, jos sitä ei ole käytetty. (Jos vaatetta käyttää, muistutuksen voi poistaa)
-
-Käytettävät teknologiat: React native (picker), Filesystem, React native paper (ainakin textinput, card, button), React navigation, Firebase-realtime database, Expo SDK-laitteen kamera ja kalenteri.
+Javascript, React (useRef, useState, useEffect), React navigation native + bottom-tabs, Firebase – realtime database, Expo/vector-icons/ionicons, React native paper (button, textinput, card), Expo SDK (Expo-camera, Expo file system, React native picker) ja React native (stylesheet, text, view, alert, image, platform, keyboard, picker, flatlist)
