@@ -6,8 +6,6 @@ import { useState, useRef, useEffect } from 'react';
 import { app } from './firebaseConfig';
 import { getDatabase, ref, set, push } from "firebase/database";
 import { useNavigation } from '@react-navigation/native';
-import * as FileSystem from 'expo-file-system';
-
 
 export default function LomakeScreen({route}) {
 
@@ -64,7 +62,7 @@ export default function LomakeScreen({route}) {
       vari: '',
       tilaisuus: '',
       sijainti: '',
-      kuvaUri: '',
+      kuvaUri: null,
     });
     navigation.navigate('Vaatelista')
   }
@@ -157,7 +155,7 @@ export default function LomakeScreen({route}) {
         <View>
           {tiedostoUri ? (
             <>
-              <Image style={{ width: 150, height: 200 }} source={{ uri: tiedostoUri }} />
+              <Image style={styles.kuva} source={{ uri: tiedostoUri }} />
             </>
           ) : (
             <Text>Ei kuvaa</Text>
@@ -171,7 +169,7 @@ export default function LomakeScreen({route}) {
   );
 }
 
-// chatgpt neuvoilla ja documentaatiolla paltformin käyttö 
+// chatgpt neuvoilla platform käyttöän ja dokumentaatiolla tarkemmat ohjeet 
 
 const styles = StyleSheet.create({
   container: {
@@ -213,5 +211,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     width: 200,
+  },
+  kuva: {
+    
+
+    ...Platform.select({
+      android: {
+        width: 150, 
+        height: 200,
+      },
+      ios: {
+        width: 100, 
+        height: 100,
+      },
+      default: {
+        width: 150, 
+        height: 200,
+      }
+    }),
+
   }
 });

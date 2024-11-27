@@ -31,9 +31,9 @@ export default function ListaScreen() {
     })
   }, []);  
 
-  console.log("suodatettu: " + suodatettuVaateLista);
-  console.log("vaatelista: " + vaateLista)
-  console.log(valittuTyyppi);
+  //console.log("suodatettu: " + suodatettuVaateLista);
+  //console.log("vaatelista: " + vaateLista)
+  //console.log(valittuTyyppi);
 
   const suodataLista = () => {
     setSuodatettuVaateLista(vaateLista.filter(vaate => {
