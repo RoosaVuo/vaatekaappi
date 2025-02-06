@@ -1,14 +1,19 @@
-import { initializeApp } from "firebase/app";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDD0mv4UZrDnNAk9z3mnPpC0-5qQoyfVyM",
-  authDomain: "vaatekaappi2.firebaseapp.com",
-  databaseURL: "https://vaatekaappi2-default-rtdb.firebaseio.com",
-  projectId: "vaatekaappi2",
-  storageBucket: "vaatekaappi2.firebasestorage.app",
-  messagingSenderId: "599055270233",
-  appId: "1:599055270233:web:5998405b8b9e4fa55e8c48"
+  apiKey: "AIzaSyASh8Z78qzxIXQH-PiOTbuH6Rv6btibBRs",
+  authDomain: "vaatekaappi-a044a.firebaseapp.com",
+  databaseURL: "https://vaatekaappi-a044a-default-rtdb.firebaseio.com",
+  projectId: "vaatekaappi-a044a",
+  storageBucket: "vaatekaappi-a044a.firebasestorage.app",
+  messagingSenderId: "908087679329",
+  appId: "1:908087679329:web:319933a7507610d9610d20"
 };
 
-
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
