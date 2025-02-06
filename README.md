@@ -1,4 +1,7 @@
-### Suunnitelma
+
+Projekti tehty Mobiiliohjelmoinnin kurssilla syksyllä 2024. Tietokantaa päivitetty 2025. Jatkokehitys: tietokannan muuttaminen niin, että kuva tallennetaan myös Firebasen tietokantaan tai muuhun vastaavaan, eikä laitteelle.
+
+## Suunnitelma
 
 Sovellukseen tallennetaan omia vaatteita ja niille erilaisia tunnisteita, kuten tyyppi, väri ja tilaisuus (arki/juhla). Vaatteen lisäämisen yhteydessä siitä otetaan kuva laitteen kameralla. Sovellus listaa vaatteet ja niitä voi suodattaa eri tekijöillä.
 
